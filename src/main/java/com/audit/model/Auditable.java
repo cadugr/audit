@@ -16,25 +16,30 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+/*Esta classe foi criada de forma a expor campos para auditoria que podem ser utilizados por qualquer entidade do nosso projeto*/
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
-@MappedSuperclass
+//A anotação a seguir é inserida para que todas as informações de mapeamento contidas nela sejam aplicadas às classes que dela herdarem.
+@MappedSuperclass 
+/*Usamos a anotação a seguir, informando a classe AuditingEntityListener fornecida pelo Spring Data JPA, responsável por gerenciar propriedades
+ * relacionadas à auditoria, como por exemplo @CreatedBy.  Esta classe faz esse gerenciamento sempre antes de inserir registros e atualizar os mesmos.
+ */
 @EntityListeners(AuditingEntityListener.class)
 public class Auditable<U>
 {
-    @CreatedBy
+    @CreatedBy //Anotação para setar o campo com o nome do usuário que criou um registro
     @Column(name = "created_by")
     private U createdBy;
 
-    @CreatedDate
+    @CreatedDate //Anotação para setar o campo com a data em que um registro foi criado
     @Column(name = "created_date")
     private Date createdDate;
 
-    @LastModifiedBy
+    @LastModifiedBy //Anotação para setar o campo com o nome do usuário que atualizou um registro
     @Column(name = "last_modified_by")
     private U lastModifiedBy;
 
-    @LastModifiedDate
+    @LastModifiedDate //Anotação para setar o campo com a data em que um registro foi atualizado
     @Column(name = "last_modified_date")
     private Date lastModifiedDate;
 }
