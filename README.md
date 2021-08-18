@@ -1,5 +1,6 @@
 # Audit Application
 
+Aplicação de exemplo sobre como utilizar auditoria de dados com Spring Data JPA.
 Documentação [Spring Boot](http://projects.spring.io/spring-boot/) 
 
 ## Requerimentos:
